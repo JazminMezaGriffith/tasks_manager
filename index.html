@@ -16,68 +16,34 @@
                 and even organice them in categories 
                 witch you can use to filter those tasks.</p>
         </header>
-        <div class="tasks">
-            <div class="card">
-                <h3>Task name</h3>
-                <p>Category</p>
-                <p>Pending</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Rerum totam facere accusantium veritatis natus ratione sunt porro distinctio, 
-                    quaerat sapiente adipisci magni ipsa! Alias sint labore quibusdam eaque, maiores harum?</p>
-                <p>Date: 14/12/2023 to 16/12/2023</p>
-                <div class="button-container">
-                    <button id="btn_edit"><img src="images/pencil-square.svg" alt="Edit"></button>
-                    <button id="btn_delete"><img src="images/trash.svg" alt="Delete"></button>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Task name</h3>
-                <p>Category</p>
-                <p>Pending</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Rerum totam facere accusantium veritatis natus ratione sunt porro distinctio, 
-                    quaerat sapiente adipisci magni ipsa! Alias sint labore quibusdam eaque, maiores harum?</p>
-                <p>Date: 14/12/2023 to 16/12/2023</p>
-                <div class="button-container">
-                    <button id="btn_edit"><img src="images/pencil-square.svg" alt="Edit"></button>
-                    <button id="btn_delete"><img src="images/trash.svg" alt="Delete"></button>
-                </div>
-            </div>
-            <div class="card">
-                <h3>Task name</h3>
-                <p>Category</p>
-                <p>Pending</p>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Rerum totam facere accusantium veritatis natus ratione sunt porro distinctio, 
-                    quaerat sapiente adipisci magni ipsa! Alias sint labore quibusdam eaque, maiores harum?</p>
-                <p>Date: 14/12/2023 to 16/12/2023</p>
-                <div class="button-container">
-                    <button id="btn_edit"><img src="images/pencil-square.svg" alt="Edit"></button>
-                    <button id="btn_delete"><img src="images/trash.svg" alt="Delete"></button>
-                </div>
-            </div>
+        <div class="tasks" id="tasks">
+           
         </div>
         <div class="addAndFilter">
-            <div class="form">
-                <h2>Add a new task</h2>
-                <select name="categories" id="categories">
-                    <option value="">General</option>
-                    <option value="">Upcoming tests</option>
-                    <option value="">Grocery lists</option>
-                    <option value="">Shows to watch</option>
-                </select>
-                <input type="text" id="task_title" placeholder="Give this task a title!">
-                <textarea name="task_description" id="task_description" cols="30" rows="10" placeholder="Describe what the task is about..."></textarea>
+            <form action="#" id="formTask">
+                <div class="form">
+                    <h2>Add a new task</h2>
+                    <select name="categories" id="categories">
+                        <option value="General">General</option>
+                        <option value="Upcoming tests">Upcoming tests</option>
+                        <option value="Grocery lists">Grocery lists</option>
+                        <option value="Shows to watch">Shows to watch</option>
+                    </select>
+                    <input type="text" id="taskTitle" placeholder="Give this task a title!">
+                    <input name="task_description" id="taskDescription" cols="30" rows="10" placeholder="Describe what the task is about..."></textarea>
+    
+                    <div class="dates">
+                        <p>From: </p>
+                        <input type="date" id="dateFrom">
+                        <p>To: </p>
+                        <input type="date" id="dateTo">
+                    </div>
+                    <input type="submit" value="Save" id = "btnSave">
 
-                <div class="dates">
-                    <p>From: </p>
-                    <input type="date">
-                    <p>To: </p>
-                    <input type="date">
+                    <!-- <button id="btn_category">Edit categories</button> -->
                 </div>
-                <button id="btn">Save</button>
-                <!-- <button id="btn_category">Edit categories</button> -->
-            </div>
+            </form>
+           
             <div class="filter">
                 <h2>Filter your tasks by category</h2>
                 <button id="btn">General</button>

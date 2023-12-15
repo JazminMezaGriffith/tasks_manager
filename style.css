@@ -27,7 +27,7 @@ h1, h2, h3 {
     margin: auto;
 }
 
-.tasks {
+#tasks {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: repeat(2, 1fr);
@@ -90,20 +90,17 @@ select {
     margin-top: 3.125em;
 }
 
-#btn {
+#btn, #btn_edit, #btn_delete {
 	font-weight: bold;
-	padding: 0.75rem 2.8125rem;
+	padding: 0.625rem;
     margin: 0.9375em;
 	border-radius: 10px;
     letter-spacing: 1px;
     text-transform: uppercase;
-}
-
-#btn_edit, #btn_delete {
-    height: 2.5rem;
-    width: 2.5rem;
-    border-radius: 100%;
-    padding: 10px;
+    background-color: #233D4D;
+	border: none;
+	color: #FFFFFF;
+	transition: transform 20ms ease-in;
 }
 
 /* #btn_category {
@@ -114,13 +111,6 @@ select {
     transition: transform 20ms ease-in;
 } */
 
-#btn, #btn_edit, #btn_delete {
-    background-color: #233D4D;
-	border: none;
-	color: #FFFFFF;
-	transition: transform 20ms ease-in;
-}
-
 button:active {
 	transform: scale(0.95);
 }
@@ -130,7 +120,7 @@ button:active {
         grid-template-areas:    "header header header"
                                 "tasks tasks addAndFilter";
     }
-    .tasks {
+    #tasks {
         grid-template-columns: repeat(2, 1fr);
     }
 }
@@ -145,7 +135,7 @@ button:active {
         grid-template-areas:    "header header header"
                                 "tasks tasks addAndFilter";
     }
-    .tasks {
+    #tasks {
         grid-template-columns: repeat(1, 1fr);
     }
 }
