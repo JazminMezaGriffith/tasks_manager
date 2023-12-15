@@ -10,8 +10,8 @@ body{
 .container {
     margin: 20px 20px;
     display: grid;
-    grid-template-areas:    "header header header"
-                            "tasks tasks addAndFilter";
+    grid-template-areas:    "header header header header"
+                            "tasks tasks tasks addAndFilter";
     gap: 25px;
 }
 
@@ -29,15 +29,15 @@ h1, h2, h3 {
 
 .tasks {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);
     gap: 20px;
     grid-area: tasks;
 }
 
 .card {
-    width: 90%;
-	max-width: 400px;
-    padding: 20px;
+	max-width: 25em;
+    padding: 1.25em;
     border-radius: 10px;
 	box-shadow: 15px 15px 30px -20px rgba(0,0,0,0.75);
     background: #F5F0BB;
@@ -45,8 +45,8 @@ h1, h2, h3 {
 }
 
 .addAndFilter {
-    max-width: 400px;
-    padding: 20px;
+    max-width: 25em;
+    padding: 1.25em;
     border-radius: 10px;
     background-color: #73A9AD;
     grid-area: addAndFilter;
@@ -75,11 +75,11 @@ select {
     -moz-appearance: none; /* Para navegadores basados en Gecko como Firefox */
     background: url('images/caret-down.svg') no-repeat right center;
     background-color: #eee;
-    background-size: 20px;
+    background-size: 1.25em;
     background-position: calc(100% - 10px) center;
 }
 #task_description {
-    height: 100px;
+    height: 6.25em;
 }
 
 .button-container {
@@ -87,12 +87,12 @@ select {
 }
 
 .filter {
-    margin-top: 50px;
+    margin-top: 3.125em;
 }
 
-#btn, #btn_category {
+#btn {
 	font-weight: bold;
-	padding: 0.75em 2.8125em;
+	padding: 0.75rem 2.8125rem;
     margin: 0.9375em;
 	border-radius: 10px;
     letter-spacing: 1px;
@@ -100,8 +100,8 @@ select {
 }
 
 #btn_edit, #btn_delete {
-    height: 40px;
-    width: 40px;
+    height: 2.5rem;
+    width: 2.5rem;
     border-radius: 100%;
     padding: 10px;
 }
@@ -125,6 +125,16 @@ button:active {
 	transform: scale(0.95);
 }
 
+@media screen and (max-width: 1400px){
+    .container {
+        grid-template-areas:    "header header header"
+                                "tasks tasks addAndFilter";
+    }
+    .tasks {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
 @media screen and (max-width: 992px){
     .dates {
         flex-direction: column;
@@ -141,6 +151,12 @@ button:active {
 }
 
 @media screen and (max-width: 768px){
+    body {
+        font-size: 12px;
+    }
+    #btn, #btn_edit, #btn_delete {
+        font-size: 12px;
+    }
     .container {
         grid-template-areas:    "header header header"
                                 "addAndFilter addAndFilter addAndFilter"
