@@ -1,0 +1,162 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+
+body{
+    background: #f6f5f7; 
+    font-family: 'Montserrat', sans-serif;
+    color: #3E363F;
+    font-size: 16px;
+}
+
+.container {
+    margin: 20px 20px;
+    display: grid;
+    grid-template-areas:    "header header header"
+                            "tasks tasks addAndFilter";
+    gap: 25px;
+}
+
+header {
+    background-color: #233D4D;
+    color: #eee;
+    padding: 20px;
+    border-radius: 10px;
+    grid-area: header;
+}
+
+h1, h2, h3 {
+    margin: auto;
+}
+
+.tasks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    grid-area: tasks;
+}
+
+.card {
+    width: 90%;
+	max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+	box-shadow: 15px 15px 30px -20px rgba(0,0,0,0.75);
+    background: #F5F0BB;
+    /* color para las tareas completadas: #C4DFAA */
+}
+
+.addAndFilter {
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #73A9AD;
+    grid-area: addAndFilter;
+}
+.addAndFilter h2 {
+    text-align: center;
+}
+.dates {
+    display: flex;
+    gap: 10px;
+}
+
+input, select, textarea {
+    font-family: 'Montserrat', sans-serif;
+    display: block;
+    margin: 5px;
+    padding: 0.75em 0.9375em;
+    border: none;
+    background-color: #eee;
+    width: 100%;
+    box-sizing: border-box;
+}
+select {
+    appearance: none; /* Elimina los estilos de apariencia nativos del navegador */
+    -webkit-appearance: none; /* Para navegadores basados en WebKit como Chrome y Safari */
+    -moz-appearance: none; /* Para navegadores basados en Gecko como Firefox */
+    background: url('images/caret-down.svg') no-repeat right center;
+    background-color: #eee;
+    background-size: 20px;
+    background-position: calc(100% - 10px) center;
+}
+#task_description {
+    height: 100px;
+}
+
+.button-container {
+    text-align: right;
+}
+
+.filter {
+    margin-top: 50px;
+}
+
+#btn, #btn_category {
+	font-weight: bold;
+	padding: 0.75em 2.8125em;
+    margin: 0.9375em;
+	border-radius: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+#btn_edit, #btn_delete {
+    height: 40px;
+    width: 40px;
+    border-radius: 100%;
+    padding: 10px;
+}
+
+/* #btn_category {
+    border: 2px solid #233D4D;
+    background-color: transparent;
+	color: #233D4D;
+    box-sizing: border-box;
+    transition: transform 20ms ease-in;
+} */
+
+#btn, #btn_edit, #btn_delete {
+    background-color: #233D4D;
+	border: none;
+	color: #FFFFFF;
+	transition: transform 20ms ease-in;
+}
+
+button:active {
+	transform: scale(0.95);
+}
+
+@media screen and (max-width: 992px){
+    .dates {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0px;
+    }
+    .container {
+        grid-template-areas:    "header header header"
+                                "tasks tasks addAndFilter";
+    }
+    .tasks {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media screen and (max-width: 768px){
+    .container {
+        grid-template-areas:    "header header header"
+                                "addAndFilter addAndFilter addAndFilter"
+                                "tasks tasks tasks";
+    }
+    .addAndFilter {
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        gap: 10px;
+    }
+    .filter {
+        margin-top: 0px;
+        text-align: center;
+    }
+    .card {
+        max-width: 100%;
+    }
+}
