@@ -1,170 +1,170 @@
-let taskList = [];
-
-const objTask = {
-    id: 0,
-    categories: '',
-    taskTitle: '',
-    description: '',
-    day:0,
-    month:0,
-    year:0,
-    day2:0,
-    month2:0,
-    year2:0,
-}
-let editStatus = false;
-
-const formTask = document.querySelector('#formTask');
-const categories = document.querySelector('#categories');
-const taskTitle = document.querySelector('#taskTitle');
-const taskDescription = document.querySelector('#taskDescription');
-const day = document.querySelector('#day');
-const month = document.querySelector('#month');
-const year = document.querySelector('#year');
-const day2 = document.querySelector('#day2');
-const month2 = document.querySelector('#month2');
-const year2 = document.querySelector('#year2');
-const btnSave = document.querySelector('#btnSave');
-
-formTask.addEventListener('submit', validateForm);
-
-function validateForm(e){
-    e.preventDefault();
-    if(categories.value ==='' || taskTitle.value == '' || taskDescription.value == '' || day.value == '' || month.value == '' || year.value == '' || day2.value == '' || month2.value == '' || year2.value == ''){
-        alert('Please fill all the fields');
-        return;
-    }
-    if(editStatus){
-        updateTask();
-        editStatus = false;
-    }else{
-        objTask.id = objTask.id + 1;
-        objTask.categories = categories.value;
-        objTask.taskTitle = taskTitle.value;
-        objTask.description = taskDescription.value;
-        objTask.day = day.value;
-        objTask.month = month.value;
-        objTask.year = year.value;
-        objTask.day2 = day2.value;
-        objTask.month2 = month2.value;
-        objTask.year2 = year2.value;
-        addTask();
-
-    }
-    formTask.reset();
-}
-function addTask(){
-    taskList.push({...objTask});
-    showTasks();
-    formTask.reset();
-}
-
-function  showTasks(){
-    cleanHtml();
-
-    const taskContainer = document.querySelector('#tasks');
-    taskList.forEach(task => {
-        const {id, categories, taskTitle, description, day, month, year, day2, month2, year2} = task;
-        const div = document.createElement('div');
-        div.className = 'card';
-      
-        div.innerHTML = `
-        <h3>${id} ${taskTitle}</h3>
-        <p><strong>Category: ${categories} </strong></p>
-        <p><strong> Status: </strong> </p>
-        <p>${description}</p>
-        <p>Date: ${day} / ${month}/ ${year} to ${day2} / ${month2}/ ${year2}</p>
-        <div class="button-container">
-            <button id="btn_edit"  name="edit">Edit <img src="images/pencil-square.svg" alt="Edit"></button>
-            <button id="btn_delete" name="delete">Delete <img src="images/trash.svg" alt="Delete"></button>
-        </div>
-        `;
-        taskContainer.appendChild(div);
-        div.dataset.id = id;
-
-        const btnDelete = document.getElementById('btn_delete');
-        btnDelete.onclick = () => deleteTask(task);
-        const btnEdit = document.getElementById('btn_edit');
-        btnEdit.onclick = () => loadTask(task);
-        
-    });
-}
-
-document.getElementById('tasks').addEventListener('click', function (e) {
-    const target = e.target;
-    if (target.name === 'delete') {
-        deleteTask(target.parentElement.parentElement);
-    } else if (target.name === 'edit') {
-        const taskId = target.parentElement.parentElement.dataset.id;
-        const task = taskList.find(task => task.id === parseInt(taskId));
-        loadTask(task);
-    }
+document.addEventListener('DOMContentLoaded', function() {
+    readData();
 });
 
-function deleteTask(taskElement) {
-    const taskId = taskElement.dataset.id;
-    taskList = taskList.filter(task => task.id !== parseInt(taskId));
-    taskElement.remove();
-}
 
-function loadTask(task) {
-    const { id, categories, taskTitle, description, dateFrom, dateTo } = task;
-    categories.value = categories;
-    taskTitle.value = taskTitle;
-    taskDescription.value = description;  // Aquí debería ser taskDescription en lugar de description
-    day.value = day;
-    month.value = month;
-    year.value = year;
-    day2.value = day2;
-    month2.value = month2;
-    year2.value = year2;
-    objTask.id = id;
-    btnSave.textContent = 'Update';
-    editStatus = true;
+function validateForm(){
+    let categories = document.getElementById("categories").value;
+    let taskTitle = document.getElementById("taskTitle").value;
+    let taskDescription = document.getElementById("taskDescription").value;
+    let stat = document.getElementById("status").value;
+    let priority = document.getElementById("priority").value;
+    console.log({categories, taskTitle, taskDescription, stat, priority});
+
+    if(categories == "" || taskTitle == "" || taskDescription == ""|| priority == "" || stat == ""){
+        alert("Please fill all the fields");
+        return false;
+    } else {
+        return true;
+    }
 }
-function cleanHtml(){
-        const taskContainer = document.querySelector('#tasks');
-        while(taskContainer.firstChild){
-            taskContainer.removeChild(taskContainer.firstChild);
+function readData(){
+    let taskList = JSON.parse(localStorage.getItem('taskList')) || [];
+    displayTasks(taskList); // Mostrar todas las tareas
+
+    if(localStorage.getItem('taskList') == null){
+        taskList = [];
+    }else{
+        taskList = JSON.parse(localStorage.getItem('taskList'));
+    }
+    var html = "";
+    taskList.forEach(function(element, index){
+        html += "<div class='card'>";
+        html += "<h3>"+element.taskTitle+"</h3>";
+        html += "<p><strong>Category: "+element.categories+"</strong></p>";
+        html += "<p><strong> Status: "+element.stat+"</strong></p>";
+        html += "<p>"+element.description+ "</p>";
+        html += "<p>Priority: "+ element.priority +"</p>";
+        html += "<div class='button-container'>";
+        html += "<button id='btn_edit' onclick='editTask("+index+")'  name='edit'>Edit <img src='images/pencil-square.svg' alt='Edit'></button>";
+        html += "<button id='btn_delete' onclick='deleteTask("+index+")' name='delete'>Delete <img src='images/trash.svg' alt='Delete'></button>";
+        html += "</div>";
+        html += "</div>";
+      
+        
+    });
+    document.querySelector("#tasks").innerHTML = html;
+    document.addEventListener('DOMContentLoaded', function() {
+        readData();
+    });
+      
+    }
+    
+
+    
+    function addTask(){
+        if (validateForm() == true){
+            let categories = document.getElementById("categories").value;
+            let taskTitle = document.getElementById("taskTitle").value;
+            let taskDescription = document.getElementById("taskDescription").value;
+            let stat = document.getElementById("status").value; // Asegúrate de que el ID coincida
+            let priority = document.getElementById("priority").value;
+    
+            let taskList;
+    
+            if(localStorage.getItem("taskList") == null){
+                taskList = [];
+            }else{
+                taskList = JSON.parse(localStorage.getItem("taskList"));
+            }
+    
+            taskList.push({
+                categories : categories,
+                taskTitle : taskTitle,
+                description : taskDescription,
+                stat : stat,
+                priority : priority
+            });
+    
+            localStorage.setItem("taskList", JSON.stringify(taskList));
+            readData();
+            document.getElementById("formTask").reset();
         }
-}
-function editTask() {
-    objTask.categories = categories.value;
-    objTask.taskTitle = taskTitle.value;
-    objTask.description = taskDescription.value;
-    objTask.day = day.value;
-    objTask.month = month.value;
-    objTask.year = year.value;
-    objTask.day2 = day2.value;
-    objTask.month2 = month2.value;
-    objTask.year2 = year2.value;
+    }
+    function deleteTask(index){
+        let taskList;
+        if(localStorage.getItem("taskList") == null){
+            taskList = [];
+        }else{
+            taskList = JSON.parse(localStorage.getItem("taskList"));
+        }
+        taskList.splice(index, 1);
+        localStorage.setItem("taskList", JSON.stringify(taskList));
+        readData();
 
-    const index = taskList.findIndex(task => task.id === objTask.id);
-    if (index !== -1) {
-        taskList[index] = { ...objTask };
-        updateTaskInUI(objTask);
-        formTask.reset();
-        btnSave.textContent = 'Save';
-        editStatus = false;
+    }
+    function editTask(index){   
+        document.getElementById("btnAdd").style.display = "none";
+        document.getElementById("btnUpdate").style.display = "block";
+        let taskList;
+    
+        if(localStorage.getItem("taskList") == null){
+            taskList = [];
+        }else{
+            taskList = JSON.parse(localStorage.getItem("taskList"));
+        }
+
+        document.getElementById("categories").value = taskList[index].categories;
+        document.getElementById("taskTitle").value = taskList[index].taskTitle;
+        document.getElementById("taskDescription").value = taskList[index].description;
+        document.getElementById("status").value = taskList[index].stat;
+        document.getElementById("priority").value = taskList[index].priority;
+
+        document.querySelector('#btnUpdate').onclick = function(){
+            if (validateForm() == true){
+                taskList[index].categories = document.getElementById("categories").value;
+                taskList[index].taskTitle = document.getElementById("taskTitle").value;
+                taskList[index].description = document.getElementById("taskDescription").value;
+                taskList[index].stat = document.getElementById("status").value;
+                taskList[index].priority = document.getElementById("priority").value;
+
+                localStorage.setItem("taskList", JSON.stringify(taskList));
+                document.getElementById("categories").value = "";
+                document.getElementById("taskTitle").value = "";
+                document.getElementById("taskDescription").value = "";
+                document.getElementById("status").value = "";
+                document.getElementById("priority").value = "";
+
+                document.getElementById("btnAdd").style.display = "block";
+                document.getElementById("btnUpdate").style.display = "none";
+        };
     }
 }
-function updateTaskInUI(updatedTask) {
-    const taskContainer = document.querySelector('#tasks');
-    const existingTaskElement = taskContainer.querySelector(`div[data-id="${updatedTask.id}"]`);
-    if (existingTaskElement) {
-        existingTaskElement.innerHTML = `
-            <h3>${updatedTask.id} ${updatedTask.taskTitle}</h3>
-            <p><strong>Category: ${updatedTask.categories} </strong></p>
-            <p><strong> Status: </strong> </p>
-            <p>${updatedTask.description}</p>
-            <p>Date: ${updatedTask.dateFrom} to ${updatedTask.dateTo}</p>
-            <div class="button-container">
-                <button id="btn_edit"  name="edit">Edit <img src="images/pencil-square.svg" alt="Edit"></button>
-                <button id="btn_delete" name="delete">Delete <img src="images/trash.svg" alt="Delete"></button>
-            </div>
-        `;
-    }
+function filterTasks(category) {
+    let taskList = JSON.parse(localStorage.getItem('taskList')) || [];
+    let filteredTasks = taskList.filter(task => task.categories === category);
+    
+    displayTasks(filteredTasks); // Función para mostrar las tareas filtradas
 }
+
+function displayTasks(tasks) {
+    var html = "";
+    tasks.forEach(function(element, index){
+        html += "<div class='card'>";
+        html += "<h3>"+element.taskTitle+"</h3>";
+        html += "<p><strong>Category: "+element.categories+"</strong></p>";
+        html += "<p><strong> Status: "+element.stat+"</strong></p>";
+        html += "<p>"+element.description+ "</p>";
+        html += "<p>Priority: "+ element.priority +"</p>";
+        html += "<div class='button-container'>";
+        html += "<button id='btn_edit' onclick='editTask("+index+")'  name='edit'>Edit <img src='images/pencil-square.svg' alt='Edit'></button>";
+        html += "<button id='btn_delete' onclick='deleteTask("+index+")' name='delete'>Delete <img src='images/trash.svg' alt='Delete'></button>";
+        html += "</div>";
+        html += "</div>";
+    });
+    document.querySelector("#tasks").innerHTML = html;
+}
+
+document.querySelectorAll('.btn_filter').forEach(button => {
+    button.addEventListener('click', function() {
+        filterTasks(this.getAttribute('data-category'));
+    });
+});
+
+    
+
+
+
 
 
 
