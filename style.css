@@ -115,6 +115,7 @@ button:active {
 	transform: scale(0.95);
 }
 
+
 @media screen and (max-width: 1400px){
     .container {
         grid-template-areas:    "header header header"

@@ -29,14 +29,14 @@
                         <option value="Grocery lists">Grocery lists</option>
                         <option value="Shows to watch">Shows to watch</option>
                     </select>
-                    <input type="text" id="taskTitle" placeholder="Give this task a title!">
+                    <input name=" taskTitle" id="taskTitle" placeholder="Give this task a title!">
                     <input name="task_description" id="taskDescription" cols="30" rows="10" placeholder="Describe what the task is about..."></textarea>
     
                     <div class="dates">
                         <p>From: </p>
-                        <input type="date" id="dateFrom">
+                        <input type="number" id="day" placeholder="D">  <input type="number" id="month" placeholder="M">  <input type="number" id="year" placeholder="Y">
                         <p>To: </p>
-                        <input type="date" id="dateTo">
+                        <input type="number" id="day2" placeholder="D">  <input type="number" id="month2" placeholder="M">  <input type="number" id="year2" placeholder="Y">
                     </div>
                     <input type="submit" value="Save" id = "btnSave">
 
@@ -46,10 +46,10 @@
            
             <div class="filter">
                 <h2>Filter your tasks by category</h2>
-                <button id="btn">General</button>
-                <button id="btn">Upcoming tests</button>
-                <button id="btn">Grocery lists</button>
-                <button id="btn">Shows to watch</button>
+                <button id="btn" value="General">General</button>
+                <button id="btn" value="Upcoming tests">Upcoming tests</button>
+                <button id="btn" value="Grocery lists">Grocery lists</button>
+                <button id="btn" value="Shows to watch">Shows to watch</button>
             </div>
         </div>
     </div>   
