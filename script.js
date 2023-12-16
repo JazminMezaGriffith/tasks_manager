@@ -1,3 +1,4 @@
+
 document.addEventListener('DOMContentLoaded', function() {
     readData();
 });
@@ -127,9 +128,11 @@ function readData(){
 
                 document.getElementById("btnAdd").style.display = "block";
                 document.getElementById("btnUpdate").style.display = "none";
+                readData();
+            }
         };
     }
-}
+   
 function filterTasks(category) {
     let taskList = JSON.parse(localStorage.getItem('taskList')) || [];
     let filteredTasks = taskList.filter(task => task.categories === category);
