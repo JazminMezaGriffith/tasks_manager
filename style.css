@@ -1,169 +1,325 @@
-@import url('https://fonts.googleapis.com/css?family=Montserrat:400,800');
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+html {
+  scroll-behavior: smooth;
+}
 
-body{
-    background: #f6f5f7; 
-    font-family: 'Montserrat', sans-serif;
-    color: #3E363F;
-    font-size: 16px;
+body {
+  background: #212121;
+  font-family: "Montserrat", sans-serif;
+  color: #000;
+  font-size: 16px;
 }
 
 .container {
-    margin: 20px 20px;
-    display: grid;
-    grid-template-areas:    "header header header header"
-                            "tasks tasks tasks addAndFilter";
-    gap: 25px;
+  margin: 1.25em 1.25rem;
+  display: grid;
+  grid-template-areas:
+    "header header header header"
+    "tasks tasks tasks addAndFilter";
+  gap: 25px;
 }
 
 header {
-    background-color: #233D4D;
-    color: #eee;
-    padding: 20px;
-    border-radius: 10px;
-    grid-area: header;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background: linear-gradient(43deg, #ffcc70 0%, #c850c0 46%, #4158d0 100%);
+  border: 1px solid rgba(255, 255, 255, 0.61);
+  color: #000;
+
+  display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 0.625em;
+  padding: 1.25em;
+  border-radius: 10px;
+  grid-area: header;
 }
 
-h1, h2, h3 {
-    margin: auto;
+h1,
+h2 {
+  margin: auto;
+  color: #fff; /* Color del texto */
+  text-shadow: 4px 4px 0px black; /* Sombras (ajusta los valores según sea necesario) */
+}
+h2 {
+    color: #ffe347;
 }
 
-#tasks {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-    gap: 20px;
-    grid-area: tasks;
+.tasks {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25em;
+  grid-area: tasks;
+  block-size: fit-content;
 }
 
 .card {
-	max-width: 25em;
-    padding: 1.25em;
-    border-radius: 10px;
-	box-shadow: 15px 15px 30px -20px rgba(0,0,0,0.75);
-    background: #F5F0BB;
-    /* color para las tareas completadas: #C4DFAA */
+  block-size: fit-content;
+  color: white;
+  position: relative;
+}
+
+.card::before,
+.card::after {
+  content: "";
+  position: absolute;
+}
+.card.finished.low::before,
+.card.finished.low::after {
+  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
+}
+.card.finished::before,
+.card.finished::after {
+  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
+}
+.card.low::before,
+.card.low::after {
+  background-color: #d11bff42; /* Cambia al color deseado para el estado 'finished' */
+}
+.card.finished.mid::before,
+.card.finished.mid::after {
+  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
+}
+.card.finished.high::before,
+.card.finished.high::after {
+  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
+}
+.card.mid::before,
+.card.mid::after {
+  background-color: #ffa63267; /* Cambia al color deseado para el estado 'finished' */
+}
+.card.high::before,
+.card.high::after {
+  background-color: #dd5467e5; /* Cambia al color deseado para el estado 'finished' */
+}
+
+.card::before {
+  border-radius: 50%;
+  width: 150px;
+  height: 150px;
+  top: 15%;
+  right: 15%;
+}
+
+.card .content {
+  min-width: 90%;
+  max-width: 100%;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.074);
+  border: 1px solid rgba(255, 255, 255, 0.445);
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border-radius: 0.7rem;
+  transition: all ease 0.3s;
+}
+
+.card .content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.card .content .title {
+  font-size: 2rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+}
+
+.card .content div p {
+  margin: 0;
+  font-size: 0.9em;
+  font-weight: 300;
+  letter-spacing: 0.1em;
+}
+
+.card.low .content:hover {
+  box-shadow: 0px 0px 20px 1px #d11bff42;
+  border: 1px solid rgba(255, 255, 255, 0.454);
+}
+.card.finished .content:hover {
+    box-shadow: 0px 0px 20px 1px #007f5f;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+}
+.card.mid .content:hover {
+    box-shadow: 0px 0px 20px 1px #ffa63267;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+}
+.card.high .content:hover {
+    box-shadow: 0px 0px 20px 1px #dd5467e5;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+}
+.card.finished.low .content:hover {
+    box-shadow: 0px 0px 20px 1px #007f5f;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+}
+.card.finished.mid .content:hover {
+    box-shadow: 0px 0px 20px 1px #007f5f;
+    border: 1px solid rgba(255, 255, 255, 0.454);
+}
+.card.finished.high .content:hover {
+    box-shadow: 0px 0px 20px 1px #007f5f;
+    border: 1px solid rgba(255, 255, 255, 0.454);
 }
 
 .addAndFilter {
-    max-width: 25em;
-    padding: 1.25em;
-    border-radius: 10px;
-    background-color: #73A9AD;
-    grid-area: addAndFilter;
+  justify-self: end;
+  max-width: 25em;
+  padding: 1.25em;
+  border-radius: 10px;
+  background-color: rgb(104, 86, 204);
+  border: 1px solid rgba(255, 255, 255, 0.61);
+  box-shadow: #d11bff42 0 15px 40px -5px;
+  grid-area: addAndFilter;
 }
 .addAndFilter h2 {
-    text-align: center;
+  text-align: center;
 }
 .dates {
-    display: flex;
-    gap: 10px;
+  margin: 35px 0 15px 0;
+  display: flex;
+  gap: 0.625em;
 }
 
-input, select, textarea {
-    font-family: 'Montserrat', sans-serif;
-    display: block;
-    margin: 5px;
-    padding: 0.75em 0.9375em;
-    border: none;
-    background-color: #eee;
-    width: 100%;
-    box-sizing: border-box;
+.input-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 15px 0 15px 0;
 }
-select {
-    appearance: none; /* Elimina los estilos de apariencia nativos del navegador */
-    -webkit-appearance: none; /* Para navegadores basados en WebKit como Chrome y Safari */
-    -moz-appearance: none; /* Para navegadores basados en Gecko como Firefox */
-    background: url('images/caret-down.svg') no-repeat right center;
-    background-color: #eee;
-    background-size: 1.25em;
-    background-position: calc(100% - 10px) center;
+.input {
+  padding: 0.625em;
+  height: 2.5em;
+  width: clamp(280px, 100%, 200px);
+  border: 2px solid #000;
+  border-radius: 12px;
+  font-size: 1rem;
+  background: #fff;
+  outline: none;
+  box-shadow: 5px 5px 0px 0px #000;
+  transition: all 0.5s;
 }
-#task_description {
-    height: 6.25em;
+.input:focus {
+  box-shadow: none;
+  transition: all 0.5s;
+}
+label {
+  margin-bottom: 5px;
+  font-weight: bold;
 }
 
 .button-container {
-    text-align: right;
+  text-align: right;
 }
 
 .filter {
-    margin-top: 3.125em;
+  margin-top: 3.125em;
+}
+.filter h2 {
+    margin-bottom: 0.9375em;
 }
 
-#btn, #btn_edit, #btn_delete {
-	font-weight: bold;
-	padding: 0.625rem;
-    margin: 0.9375em;
-	border-radius: 10px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    background-color: #233D4D;
-	border: none;
-	color: #FFFFFF;
-	transition: transform 20ms ease-in;
+#btnSave {
+  width: 100%;
 }
 
-/* #btn_category {
-    border: 2px solid #233D4D;
-    background-color: transparent;
-	color: #233D4D;
-    box-sizing: border-box;
-    transition: transform 20ms ease-in;
-} */
-
-button:active {
-	transform: scale(0.95);
+.btn {
+  margin: 0.3125em;
+  padding: 0.625em 0.9375em;
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.5s;
+  border-radius: 12px;
+  font-weight: bolder;
+  box-shadow: 0 2px 0 2px #000;
 }
 
-
-@media screen and (max-width: 1400px){
-    .container {
-        grid-template-areas:    "header header header"
-                                "tasks tasks addAndFilter";
-    }
-    #tasks {
-        grid-template-columns: repeat(2, 1fr);
-    }
+.btn:before {
+  content: "";
+  position: absolute;
+  width: 6.25em;
+  height: 120%;
+  background-color: #fff;
+  top: 50%;
+  transform: skewX(30deg) translate(-350%, -50%);
+  transition: all 0.5s;
 }
 
-@media screen and (max-width: 992px){
-    .dates {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 0px;
-    }
-    .container {
-        grid-template-areas:    "header header header"
-                                "tasks tasks addAndFilter";
-    }
-    #tasks {
-        grid-template-columns: repeat(1, 1fr);
-    }
+.btn:hover {
+  background-color: #4cc9f0;
+  color: #fff;
 }
 
-@media screen and (max-width: 768px){
-    body {
-        font-size: 12px;
-    }
-    #btn, #btn_edit, #btn_delete {
-        font-size: 12px;
-    }
-    .container {
-        grid-template-areas:    "header header header"
-                                "addAndFilter addAndFilter addAndFilter"
-                                "tasks tasks tasks";
-    }
-    .addAndFilter {
-        max-width: 100%;
-        display: grid;
-        grid-template-columns: 3fr 1fr;
-        gap: 10px;
-    }
-    .filter {
-        margin-top: 0px;
-        text-align: center;
-    }
-    .card {
-        max-width: 100%;
-    }
+.btn:hover::before {
+  transform: skewX(30deg) translate(300%, -50%);
+  transition-delay: 0.1s;
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+@media screen and (max-width: 1400px) {
+  .container {
+    grid-template-areas:
+      "header header header"
+      "tasks tasks addAndFilter";
+  }
+  .tasks {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .dates {
+    margin: 0.9375em 0 0.9375em 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0px;
+  }
+  .dates label {
+    margin-top: 0.625em;
+  }
+  .container {
+    grid-template-areas:
+      "header header header"
+      "tasks tasks addAndFilter";
+  }
+  .tasks {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
+  #btn,
+  #btn_edit,
+  #btn_delete {
+    font-size: 12px;
+  }
+  .container {
+    grid-template-areas:
+      "header header header"
+      "addAndFilter addAndFilter addAndFilter"
+      "tasks tasks tasks";
+  }
+  .addAndFilter {
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 0.625em;
+  }
+  .filter {
+    margin-top: 0px;
+    text-align: center;
+  }
+  #btnSave {
+    width: clamp(300px, 100%, 200px);
+  }
 }

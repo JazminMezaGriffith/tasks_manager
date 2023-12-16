@@ -9,55 +9,112 @@
   </head>
   <body>
     <div class="container">
-        <header>
+      <header>
+        <div>
             <h1>Welcome to your tasks manager!</h1>
-            <p>Here you can add and edit tasks, 
-                mark them as finished or pending 
-                and even organize them in categories 
-                which you can use to filter those tasks.</p>
-        </header>
-        <div class="tasks" id="tasks">
-           
+            <p>
+            Organize your day efficiently and manage your activities with this
+            intuitive tasks manager.
+            </p>
         </div>
-        <div class="addAndFilter">
-            <form action="#" id="formTask">
-                <div class="form">
-                    <h2>Add a new task</h2>
-                    <select name="categories" id="categories">
-                        <option value="General">General</option>
-                        <option value="Upcoming tests">Upcoming tests</option>
-                        <option value="Grocery lists">Grocery lists</option>
-                        <option value="Shows to watch">Shows to watch</option>
-                    </select>
-                    <select name="categories" id="priority">
-                        <option value="High">High</option>
-                        <option value="Mid">Mid</option>
-                        <option value="Low">Low</option>
-                    </select>
-                    <select name="categories" id="status">
-                        <option value="Finish">Finish</option>
-                        <option value="In Progress">In Progress</option>
-                        <option value="To do">To do</option>
-                    </select>
-                    <input name=" taskTitle" id="taskTitle" placeholder="Give this task a title!">
-                    <input name="task_description" id="taskDescription" cols="30" rows="10" placeholder="Describe what the task is about...">
-                    <input type="button" value="Save" id="btnAdd" onclick="addTask()">
-                    <input type="button" value="Update" id="btnUpdate" style="display: none;"  >
-                
-
-                    <!-- <button id="btn_category">Edit categories</button> -->
-                </div>
-            </form>
-           
-            <div class="filter">
-                <h2>Filter your tasks by category</h2>
-                <button class="btn_filter" data-category="General">General</button>
-                <button class="btn_filter" data-category="Upcoming tests">Upcoming tests</button>
-                <button class="btn_filter" data-category="Grocery lists">Grocery lists</button>
-                <button class="btn_filter" data-category="Shows to watch">Shows to watch</button>
-
+        <div class="button-container">
+          <button class="btn" onclick="scrollToSection('filter')">
+            See the filters!
+          </button>
+          <button class="btn" onclick="scrollToSection('formTask')">
+            Add task
+          </button>
+        </div>
+      </header>
+      <div class="tasks" id="tasks">
+        <!-- <div class="card">
+          <div class="content">
+            <span class="title">Task name</span>
+            <div class="info">
+              <p>Category</p>
+              <p>Pending</p>
             </div>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum
+              totam facere accusantium veritatis natus ratione sunt porro
+              distinctio, quaerat sapiente adipisci magni ipsa! Alias sint
+              labore quibusdam eaque, maiores harum?
+            </p>
+            <em>Priority: low</em>
+            <div class="button-container">
+              <button class="btn" id="btn_edit">Edit</button>
+              <button class="btn" id="btn_delete">Delete</button>
+            </div>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="addAndFilter">
+        <form action="#" id="formTask">
+          <h2>Add a new task</h2>
+          <div class="input-container">
+            <label for="categories">Category</label>
+            <select class="input" name="categories" id="categories">
+              <option value="General">General</option>
+              <option value="Upcoming tests">Upcoming tests</option>
+              <option value="Grocery lists">Grocery lists</option>
+              <option value="Shows to watch">Shows to watch</option>
+            </select>
+          </div>
+          <div class="input-container">
+            <label for="prorities">Status</label>
+            <select class="input" name="categories" id="status">
+                <option value="Finished">Finished</option>
+                <option value="In Progress">In Progress</option>
+                <option value="To do">To do</option>
+            </select>
+          </div>
+          <div class="input-container">
+            <label for="prorities">Priority</label>
+            <select class="input" name="categories" id="priority">
+              <option value="Low">Low</option>
+              <option value="Mid">Mid</option>
+              <option value="High">High</option>
+            </select>
+          </div>
+
+          <div class="input-container">
+            <label for="title">Title</label>
+            <input
+              class="input"
+              name="title"
+              type="text"
+              id="taskTitle"
+              placeholder="Give this task a title!"
+            /></input>
+          </div>
+          <div class="input-container">
+            <label for="task_description">Description</label>
+            <input
+              class="input"
+              name="task_description"
+              id="taskDescription"
+              cols="30"
+              rows="10"
+              placeholder="Describe what the task is about..."
+            ></input>
+            
+          </div>
+
+          <input class="btn" type="button" value="Save" id="btnAdd" onclick="addTask()">
+          <input class="btn" type="button" value="Update" id="btnUpdate" style="display: none;"  >
+        </form>
+
+        <div class="filter" id="filter">
+          <h2>Filter your tasks by category</h2>
+          <div>
+            <button class="btn btn_filter" data-category="General">General</button>
+            <button class="btn btn_filter" data-category="Upcoming tests">Upcoming tests</button>
+            <button class="btn btn_filter" data-category="Grocery lists">Grocery lists</button>
+            <button class="btn btn_filter" data-category="Shows to watch">Shows to watch</button>
+          </div>
         </div>
-    </div>   
+      </div>
+    </div>
   </body>
 </html>
