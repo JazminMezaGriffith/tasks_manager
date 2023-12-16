@@ -154,11 +154,20 @@ function readData(){
   }
 }
 function filterTasks(category) {
-  let taskList = JSON.parse(localStorage.getItem('taskList')) || [];
-  let filteredTasks = taskList.filter(task => task.categories === category);
-  
-  displayTasks(filteredTasks); // Función para mostrar las tareas filtradas
+    let taskList = JSON.parse(localStorage.getItem('taskList')) || [];
+    let tasksToShow;
+
+    if (category === "all") {
+        // Si la categoría es 'all', muestra todas las tareas.
+        tasksToShow = taskList;
+    } else {
+        // De lo contrario, filtra las tareas por la categoría seleccionada.
+        tasksToShow = taskList.filter(task => task.categories === category);
+    }
+
+    displayTasks(tasksToShow); // Función para mostrar las tareas filtradas o todas las tareas
 }
+
 
 function displayTasks(tasks) {
   var html = "";
