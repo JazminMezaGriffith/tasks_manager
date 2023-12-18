@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
+
 html {
   scroll-behavior: smooth;
 }
@@ -13,10 +14,11 @@ body {
 .container {
   margin: 1.25em 1.25rem;
   display: grid;
+  grid-template-columns: repeat(4, 1fr);
   grid-template-areas:
     "header header header header"
     "tasks tasks tasks addAndFilter";
-  gap: 25px;
+  gap: 1.5625rem;
 }
 
 header {
@@ -29,8 +31,8 @@ header {
   color: #000;
 
   display: grid;
-    grid-template-columns: 3fr 1fr;
-    gap: 0.625em;
+  grid-template-columns: 3fr 1fr;
+  gap: 0.625em;
   padding: 1.25em;
   border-radius: 10px;
   grid-area: header;
@@ -39,25 +41,35 @@ header {
 h1,
 h2 {
   margin: auto;
-  color: #fff; /* Color del texto */
-  text-shadow: 4px 4px 0px black; /* Sombras (ajusta los valores según sea necesario) */
+  color: #fff;
+  /* Color del texto */
+  text-shadow: 4px 4px 0px black;
+  /* Sombras (ajusta los valores según sea necesario) */
 }
+
 h2 {
-    color: #ffe347;
+  color: #ffe347;
 }
 
 .tasks {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1.25em;
   grid-area: tasks;
   block-size: fit-content;
+  /* grid-auto-rows: 1fr; */
 }
 
 .card {
-  block-size: fit-content;
+  /* height: 100%; */
+  max-width: 25rem;
   color: white;
   position: relative;
+}
+
+.card .content span,
+.card .content p {
+  word-wrap: break-word;
 }
 
 .card::before,
@@ -65,44 +77,47 @@ h2 {
   content: "";
   position: absolute;
 }
+
 .card.finished.low::before,
-.card.finished.low::after {
-  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
-}
+.card.finished.low::after,
+.card.finished.mid::before,
+.card.finished.mid::after,
+.card.finished.high::before,
+.card.finished.high::after,
 .card.finished::before,
 .card.finished::after {
-  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
+  background-color: #007f5f;
+  /* Cambia al color deseado para el estado 'finished' */
 }
+
 .card.low::before,
 .card.low::after {
-  background-color: #d11bff42; /* Cambia al color deseado para el estado 'finished' */
+  background-color: #d11bff42;
+  /* Cambia al color deseado para el estado 'finished' */
 }
-.card.finished.mid::before,
-.card.finished.mid::after {
-  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
-}
-.card.finished.high::before,
-.card.finished.high::after {
-  background-color: #007f5f; /* Cambia al color deseado para el estado 'finished' */
-}
+
 .card.mid::before,
 .card.mid::after {
-  background-color: #ffa63267; /* Cambia al color deseado para el estado 'finished' */
+  background-color: #ffa63267;
+  /* Cambia al color deseado para el estado 'finished' */
 }
+
 .card.high::before,
 .card.high::after {
-  background-color: #dd5467e5; /* Cambia al color deseado para el estado 'finished' */
+  background-color: #dd5467e5;
+  /* Cambia al color deseado para el estado 'finished' */
 }
 
 .card::before {
   border-radius: 50%;
-  width: 150px;
-  height: 150px;
+  width: 9.375em;
+  height: 9.375em;
   top: 15%;
   right: 15%;
 }
 
 .card .content {
+  /* min-height: 90%; */
   min-width: 90%;
   max-width: 100%;
   padding: 1rem;
@@ -121,8 +136,8 @@ h2 {
 }
 
 .card .content .title {
-  font-size: 2rem;
-  font-weight: 500;
+  font-size: 1.1875rem;
+  margin-bottom: 0.625rem;
   letter-spacing: 0.1em;
 }
 
@@ -137,29 +152,23 @@ h2 {
   box-shadow: 0px 0px 20px 1px #d11bff42;
   border: 1px solid rgba(255, 255, 255, 0.454);
 }
-.card.finished .content:hover {
-    box-shadow: 0px 0px 20px 1px #007f5f;
-    border: 1px solid rgba(255, 255, 255, 0.454);
-}
-.card.mid .content:hover {
-    box-shadow: 0px 0px 20px 1px #ffa63267;
-    border: 1px solid rgba(255, 255, 255, 0.454);
-}
-.card.high .content:hover {
-    box-shadow: 0px 0px 20px 1px #dd5467e5;
-    border: 1px solid rgba(255, 255, 255, 0.454);
-}
-.card.finished.low .content:hover {
-    box-shadow: 0px 0px 20px 1px #007f5f;
-    border: 1px solid rgba(255, 255, 255, 0.454);
-}
-.card.finished.mid .content:hover {
-    box-shadow: 0px 0px 20px 1px #007f5f;
-    border: 1px solid rgba(255, 255, 255, 0.454);
-}
+
+.card.finished .content:hover,
+.card.finished.low .content:hover,
+.card.finished.mid .content:hover,
 .card.finished.high .content:hover {
-    box-shadow: 0px 0px 20px 1px #007f5f;
-    border: 1px solid rgba(255, 255, 255, 0.454);
+  box-shadow: 0px 0px 20px 1px #007f5f;
+  border: 1px solid rgba(255, 255, 255, 0.454);
+}
+
+.card.mid .content:hover {
+  box-shadow: 0px 0px 20px 1px #ffa63267;
+  border: 1px solid rgba(255, 255, 255, 0.454);
+}
+
+.card.high .content:hover {
+  box-shadow: 0px 0px 20px 1px #dd5467e5;
+  border: 1px solid rgba(255, 255, 255, 0.454);
 }
 
 .addAndFilter {
@@ -172,9 +181,11 @@ h2 {
   box-shadow: #d11bff42 0 15px 40px -5px;
   grid-area: addAndFilter;
 }
+
 .addAndFilter h2 {
   text-align: center;
 }
+
 .dates {
   margin: 35px 0 15px 0;
   display: flex;
@@ -187,22 +198,25 @@ h2 {
   justify-content: space-between;
   margin: 15px 0 15px 0;
 }
+
 .input {
   padding: 0.625em;
-  height: 2.5em;
-  width: clamp(280px, 100%, 200px);
+  height: 2.8125em;
+  width: 95%;
   border: 2px solid #000;
   border-radius: 12px;
-  font-size: 1rem;
+  font-size: 1em;
   background: #fff;
   outline: none;
   box-shadow: 5px 5px 0px 0px #000;
   transition: all 0.5s;
 }
+
 .input:focus {
   box-shadow: none;
   transition: all 0.5s;
 }
+
 label {
   margin-bottom: 5px;
   font-weight: bold;
@@ -215,15 +229,17 @@ label {
 .filter {
   margin-top: 3.125em;
 }
+
 .filter h2 {
-    margin-bottom: 0.9375em;
+  margin-bottom: 0.9375em;
 }
 
-#btnSave {
+#btnAdd, #btnUpdate {
   width: 100%;
 }
 
 .btn {
+  font-size: 1em;
   margin: 0.3125em;
   padding: 0.625em 0.9375em;
   background: none;
@@ -265,12 +281,14 @@ label {
 
 @media screen and (max-width: 1400px) {
   .container {
+    grid-template-columns: repeat(3, 1fr);
     grid-template-areas:
       "header header header"
       "tasks tasks addAndFilter";
   }
+
   .tasks {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
@@ -281,16 +299,24 @@ label {
     align-items: flex-start;
     gap: 0px;
   }
+
   .dates label {
     margin-top: 0.625em;
   }
+
   .container {
+    grid-template-columns: repeat(2, 1fr);
     grid-template-areas:
-      "header header header"
-      "tasks tasks addAndFilter";
+      "header header"
+      "tasks addAndFilter";
   }
+
   .tasks {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .card {
+    max-width: 100%;
   }
 }
 
@@ -298,28 +324,37 @@ label {
   body {
     font-size: 12px;
   }
-  #btn,
-  #btn_edit,
-  #btn_delete {
-    font-size: 12px;
-  }
+
   .container {
     grid-template-areas:
-      "header header header"
-      "addAndFilter addAndFilter addAndFilter"
-      "tasks tasks tasks";
+      "header header"
+      "addAndFilter addAndFilter"
+      "tasks tasks";
   }
+
   .addAndFilter {
     max-width: 100%;
     display: grid;
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 2fr 1fr;
     gap: 0.625em;
   }
+
   .filter {
     margin-top: 0px;
     text-align: center;
   }
-  #btnSave {
-    width: clamp(300px, 100%, 200px);
+
+  .input {
+    width: 85%;
+  }
+
+  #btnAdd {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  body {
+    font-size: 10px;
   }
 }
